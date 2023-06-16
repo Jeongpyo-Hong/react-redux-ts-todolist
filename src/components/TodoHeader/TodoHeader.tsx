@@ -1,7 +1,12 @@
-import React from "react";
+import "./todoHeader.scss";
 
 const TodoHeader = () => {
-  return <div>TodoHeader</div>;
+  return (
+    <div className="headerContainer">
+      <div className="headerTitle">TODOLIST</div>
+      <div>일상 기록하기</div>
+    </div>
+  );
 };
 
 export default TodoHeader;

@@ -1,7 +1,7 @@
-import React from "react";
+import TodoAppContainer from "./containers/TodoAppContainer";
 
 const App = () => {
-  return <div>App</div>;
+  return <TodoAppContainer />;
 };
 
 export default App;

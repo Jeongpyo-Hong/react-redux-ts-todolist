@@ -1,0 +1,19 @@
+$bgColor: darkslategrey;
+$innerBgColor: #fff1e5;
+
+.container {
+  background: $bgColor;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.innerContainer {
+  width: 800px;
+  height: 500px;
+  background: $innerBgColor;
+  border-radius: 12px;
+  padding: 50px;
+}
