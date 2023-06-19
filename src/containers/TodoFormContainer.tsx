@@ -3,7 +3,6 @@ import TodoForm from "../components/TodoForm/TodoForm";
 import uuid from "react-uuid";
 import { createTodo } from "../module/todos/thunk";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../module/todos";
 
 const TodoFormContainer = () => {
   let id = uuid();
@@ -20,7 +19,7 @@ const TodoFormContainer = () => {
       text,
       done: false,
     };
-    // dispatch(createTodo(newTodo));
+    dispatch(createTodo(newTodo));
     setText("");
   };
 
