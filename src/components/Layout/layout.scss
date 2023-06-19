@@ -1,8 +1,5 @@
-$bgColor: darkslategrey;
-$innerBgColor: #fff1e5;
-
 .container {
-  background: $bgColor;
+  background: var(--mainColor);
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -13,7 +10,7 @@ $innerBgColor: #fff1e5;
 .innerContainer {
   width: 800px;
   height: 500px;
-  background: $innerBgColor;
+  background: var(--subColor);
   border-radius: 12px;
   padding: 50px;
 }
