@@ -55,7 +55,7 @@ const initialState = {
  * 리듀서
  */
 const todos = createReducer<TodoState, TodosActions>(initialState, {
-  // 조회
+  // GET
   [actions.GET_TODOS_LOADING]: (state) => ({
     ...state,
     todos: utils.loading(),
@@ -64,11 +64,29 @@ const todos = createReducer<TodoState, TodosActions>(initialState, {
     ...state,
     todos: {
       loading: false,
-      data: [...state.todos.data, action.payload],
+      data: action.payload,
       error: null,
     },
   }),
   [actions.GET_TODOS_ERROR]: (state, action) => ({
+    ...state,
+    todos: utils.error(action.payload),
+  }),
+
+  // CREATE
+  [actions.CREATE_TODOS_LOADING]: (state) => ({
+    ...state,
+    todos: utils.loading(),
+  }),
+  [actions.CREATE_TODOS_SUCCESS]: (state, action) => ({
+    ...state,
+    todos: {
+      loading: false,
+      data: [...state.todos.data, action.payload],
+      error: null,
+    },
+  }),
+  [actions.CREATE_TODOS_ERROR]: (state, action) => ({
     ...state,
     todos: utils.error(action.payload),
   }),

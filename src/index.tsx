@@ -5,11 +5,7 @@ import "./global.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware, Store } from "redux";
-import rootReducer from "./module/index";
-import thunk from "redux-thunk";
-
-const store: Store = createStore(rootReducer, applyMiddleware(thunk));
+import { store } from "./module/todos";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

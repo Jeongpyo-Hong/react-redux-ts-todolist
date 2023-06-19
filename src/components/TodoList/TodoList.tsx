@@ -2,7 +2,6 @@ import "./todoList.scss";
 import TodoItem from "../TodoItem/TodoItem";
 
 const TodoList = ({ todos }: any) => {
-  console.log("todos:", todos);
   return (
     <div className="listContainer">
       <ul>
