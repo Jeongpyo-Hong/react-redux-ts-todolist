@@ -31,7 +31,6 @@ export const createTodo = (
     dispatch(request());
     try {
       const res = await instance.post<TodoState>("/todos", todo);
-      console.log(res);
       dispatch(success(res.data));
     } catch (e) {
       if (axios.isAxiosError(e)) dispatch(failure(e));

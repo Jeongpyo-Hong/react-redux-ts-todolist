@@ -13,7 +13,7 @@ export interface TodoParams {
 export interface TodoState {
   todos: {
     loading: boolean;
-    data: TodoParams[] | null;
+    data: TodoParams[] | any;
     error: any | null;
   };
 }
