@@ -1,12 +1,14 @@
 import "./todoList.scss";
-import Todo from "../TodoItem/TodoItem";
-import { TodoState } from "../../module/todos/types";
+import TodoItem from "../TodoItem/TodoItem";
 
-const TodoList = ({ todos }: TodoState) => {
+const TodoList = ({ todos }: any) => {
+  console.log("todos:", todos);
   return (
     <div className="listContainer">
       <ul>
-        <Todo />
+        {todos?.map((todo: any) => (
+          <TodoItem key={todo.id} todo={todo} />
+        ))}
       </ul>
     </div>
   );

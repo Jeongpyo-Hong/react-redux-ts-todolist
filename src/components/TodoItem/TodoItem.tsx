@@ -1,13 +1,17 @@
 import "./todoItem.scss";
 
-const Todo = () => {
+const TodoItem = ({ todo }: any) => {
   return (
     <li>
-      <div>내용</div>
+      {todo?.done ? (
+        <div className="done">{todo?.text}</div>
+      ) : (
+        <div>{todo?.text}</div>
+      )}
       <button className="doneBtn">✔️</button>
       <button className="removeBtn">❌</button>
     </li>
   );
 };
 
-export default Todo;
+export default TodoItem;

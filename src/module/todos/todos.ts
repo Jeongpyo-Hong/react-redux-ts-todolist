@@ -10,7 +10,18 @@ import { TodosActions } from "./types";
 export const utils = {
   initial: {
     loading: false,
-    data: [],
+    data: [
+      {
+        id: 0,
+        text: "테스트1",
+        done: true,
+      },
+      {
+        id: 1,
+        text: "테스트2",
+        done: false,
+      },
+    ],
     error: null,
   },
 
