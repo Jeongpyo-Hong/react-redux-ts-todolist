@@ -1,5 +1,5 @@
 import { createAsyncAction } from "typesafe-actions";
-import { TodoState } from "./types";
+import { TodoParams, TodoState } from "./types";
 import { AxiosError } from "axios";
 
 export const GET_TODOS_LOADING = "todos/GET_TODOS_LOADING";
@@ -25,16 +25,16 @@ export const createTodosAsync = createAsyncAction(
   CREATE_TODOS_LOADING,
   CREATE_TODOS_SUCCESS,
   CREATE_TODOS_ERROR
-)<undefined, TodoState, AxiosError>();
+)<undefined, TodoParams, AxiosError>();
 
 export const toggleTodosAsync = createAsyncAction(
   TOGGLE_TODOS_LOADING,
   TOGGLE_TODOS_SUCCESS,
   TOGGLE_TODOS_ERROR
-)<undefined, TodoState, AxiosError>();
+)<undefined, string, AxiosError>();
 
 export const removeTodosAsync = createAsyncAction(
   REMOVE_TODOS_LOADING,
   REMOVE_TODOS_SUCCESS,
   REMOVE_TODOS_ERROR
-)<undefined, TodoState, AxiosError>();
+)<undefined, string, AxiosError>();

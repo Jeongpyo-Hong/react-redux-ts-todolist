@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TodoForm from "../components/TodoForm/TodoForm";
 import uuid from "react-uuid";
-import { createTodo } from "../module/todos/thunk";
+import { createTodo, getTodo } from "../module/todos/thunk";
 import { useDispatch } from "react-redux";
 
 const TodoFormContainer = () => {
@@ -20,6 +20,7 @@ const TodoFormContainer = () => {
       done: false,
     };
     dispatch(createTodo(newTodo));
+    dispatch(getTodo());
     setText("");
   };
 

@@ -1,6 +1,6 @@
 import { createReducer } from "typesafe-actions";
 import * as actions from "./actions";
-import { TodoState } from "./types";
+import { TodoParams, TodoState } from "./types";
 import { TodosActions } from "./types";
 
 /**
@@ -10,30 +10,13 @@ import { TodosActions } from "./types";
 export const utils = {
   initial: {
     loading: false,
-    data: [
-      {
-        id: 0,
-        text: "테스트1",
-        done: true,
-      },
-      {
-        id: 1,
-        text: "테스트2",
-        done: false,
-      },
-    ],
+    data: [],
     error: null,
   },
 
   loading: () => ({
     loading: true,
     data: null,
-    error: null,
-  }),
-
-  success: (payload: TodoState) => ({
-    loading: true,
-    data: payload,
     error: null,
   }),
 
@@ -87,6 +70,46 @@ const todos = createReducer<TodoState, TodosActions>(initialState, {
     },
   }),
   [actions.CREATE_TODOS_ERROR]: (state, action) => ({
+    ...state,
+    todos: utils.error(action.payload),
+  }),
+
+  // TOGGLE
+  [actions.TOGGLE_TODOS_LOADING]: (state) => ({
+    ...state,
+    todos: utils.loading(),
+  }),
+  [actions.TOGGLE_TODOS_SUCCESS]: (state, action) => {
+    return {
+      ...state,
+      todos: {
+        loading: false,
+        data: state.todos.data.map((todo: TodoParams) =>
+          todo.id === action.payload ? { ...todo, done: !todo.done } : todo
+        ),
+        error: null,
+      },
+    };
+  },
+  [actions.TOGGLE_TODOS_ERROR]: (state, action) => ({
+    ...state,
+    todos: utils.error(action.payload),
+  }),
+
+  // REMOVE
+  [actions.REMOVE_TODOS_LOADING]: (state) => ({
+    ...state,
+    todos: utils.loading(),
+  }),
+  [actions.REMOVE_TODOS_SUCCESS]: (state, action) => ({
+    ...state,
+    todos: {
+      loading: false,
+      data: state.todos.data.filter((todo: any) => todo.id !== action.payload),
+      error: null,
+    },
+  }),
+  [actions.REMOVE_TODOS_ERROR]: (state, action) => ({
     ...state,
     todos: utils.error(action.payload),
   }),

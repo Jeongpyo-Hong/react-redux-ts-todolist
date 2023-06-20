@@ -1,17 +1,14 @@
 import axios from "axios";
 import instance from "../../api/todos";
-import { TodoParams, TodoState, TodosActions } from "./types";
-import { RootState } from "../";
-import { ThunkAction } from "redux-thunk";
+import { TodoParams, TodoState } from "./types";
 import {
-  createTodosAsync,
   getTodosAsync,
-  removeTodosAsync,
+  createTodosAsync,
   toggleTodosAsync,
+  removeTodosAsync,
 } from "../todos/actions";
-import { Dispatch } from "redux";
 
-export const getTodo = (): any => async (dispatch: Dispatch) => {
+export const getTodo = (): any => async (dispatch: any) => {
   const { request, success, failure } = getTodosAsync;
   dispatch(request());
   try {
@@ -24,40 +21,38 @@ export const getTodo = (): any => async (dispatch: Dispatch) => {
 
 export const createTodo =
   (todo: TodoParams): any =>
-  async (dispatch: Dispatch) => {
-    console.log("aaa");
+  async (dispatch: any) => {
     const { request, success, failure } = createTodosAsync;
     dispatch(request());
     try {
-      const res = await instance.post<TodoState>("/todos", todo);
-      console.log("bbb");
-      dispatch(success(res.data));
+      await instance.post<TodoState>("/todos", todo);
+      dispatch(success(todo));
     } catch (e) {
       if (axios.isAxiosError(e)) dispatch(failure(e));
     }
   };
 
 export const toggleTodo =
-  (id: string): ThunkAction<void, RootState, null, TodosActions> =>
-  async (dispatch: Dispatch) => {
+  (id: string): any =>
+  async (dispatch: any) => {
     const { request, success, failure } = toggleTodosAsync;
     dispatch(request());
     try {
-      const res = await instance.post<TodoState>("/todos", id);
-      dispatch(success(res.data));
+      await instance.patch<TodoState>(`/todos/${id}`, id);
+      dispatch(success(id));
     } catch (e) {
       if (axios.isAxiosError(e)) dispatch(failure(e));
     }
   };
 
 export const removeTodo =
-  (id: string): ThunkAction<void, RootState, null, TodosActions> =>
-  async (dispatch: Dispatch) => {
+  (id: string): any =>
+  async (dispatch: any) => {
     const { request, success, failure } = removeTodosAsync;
     dispatch(request());
     try {
-      const res = await instance.post<TodoState>("/todos", id);
-      dispatch(success(res.data));
+      await instance.delete<TodoState>(`/todos/${id}`);
+      dispatch(success(id));
     } catch (e) {
       if (axios.isAxiosError(e)) dispatch(failure(e));
     }

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import TodoList from "../components/TodoList/TodoList";
 import { RootState } from "../module";
 import { useEffect } from "react";
-import { getTodo } from "../module/todos";
+import { getTodo, removeTodo, toggleTodo } from "../module/todos";
 import { useDispatch } from "react-redux";
 
 const TodoListContainer = () => {
@@ -10,20 +10,31 @@ const TodoListContainer = () => {
     (state: RootState) => state.todos.todos
   );
   const dispatch = useDispatch();
-  console.log(data, loading, error);
+
+  const toggleHandler = (id: string): void => {
+    dispatch(toggleTodo(id));
+    dispatch(getTodo());
+  };
+
+  const removeHandler = (id: string): void => {
+    dispatch(removeTodo(id));
+    dispatch(getTodo());
+  };
 
   useEffect(() => {
     dispatch(getTodo());
-  }, []);
+  }, [dispatch]);
 
-  if (loading) return <div>로딩중...</div>;
+  if (loading) <div>로딩중...</div>;
 
-  if (error) return null;
+  if (error) return <div>{error}</div>;
 
   return (
-    <div>
-      <TodoList todos={data} />
-    </div>
+    <TodoList
+      todos={data}
+      toggleHandler={toggleHandler}
+      removeHandler={removeHandler}
+    />
   );
 };
 export default TodoListContainer;
