@@ -24,4 +24,3 @@ export interface TodoState {
 export const store: Store = createStore(rootReducer, applyMiddleware(thunk));
 
 export type TodosActions = ActionType<typeof actions>;
-export type AppDispatch = typeof store.dispatch;

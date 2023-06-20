@@ -60,8 +60,13 @@ const todos = createReducer<TodoState, TodosActions>(initialState, {
     ...state,
     todos: utils.loading(),
   }),
-  [actions.GET_TODOS_SUCCESS]: (state) => ({
+  [actions.GET_TODOS_SUCCESS]: (state, action) => ({
     ...state,
+    todos: {
+      loading: false,
+      data: action.payload,
+      error: null,
+    },
   }),
   [actions.GET_TODOS_ERROR]: (state, action) => ({
     ...state,

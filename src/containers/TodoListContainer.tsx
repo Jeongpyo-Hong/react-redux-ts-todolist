@@ -6,12 +6,19 @@ import { getTodo } from "../module/todos";
 import { useDispatch } from "react-redux";
 
 const TodoListContainer = () => {
-  const { data } = useSelector((state: RootState) => state.todos.todos);
+  const { data, loading, error } = useSelector(
+    (state: RootState) => state.todos.todos
+  );
   const dispatch = useDispatch();
+  console.log(data, loading, error);
 
   useEffect(() => {
-    // dispatch(getTodo());
-  });
+    dispatch(getTodo());
+  }, []);
+
+  if (loading) return <div>로딩중...</div>;
+
+  if (error) return null;
 
   return (
     <div>
